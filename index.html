@@ -964,10 +964,443 @@
     </div>
   </section>
 
-      Explore Resources →
-    </a>
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resources Sections — Marae Hoover</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  /* ─────────────────────────────────────────
+     NOTE: Replace these approximations with
+     your actual CSS variable values.
+  ───────────────────────────────────────── */
+  :root {
+    --cream:      #F7F3EE;
+    --cream-dark: #EDE8DF;
+    --navy:       #1C2B4A;
+    --royal:      #2952A3;
+    --divider:    #DDD5C8;
+    --warm-gray:  #7A726A;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Lato', sans-serif; background: var(--cream-dark); }
+
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 48px;
+  }
+
+  /* ─── SHARED: EYEBROW ─── */
+  .section-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--royal);
+    margin-bottom: 28px;
+  }
+  .section-eyebrow::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--divider);
+  }
+
+  /* ─── EXISTING: THANKS SECTION (for context) ─── */
+  .thanks-section { background: var(--cream-dark); }
+  .thanks-intro {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--navy);
+    line-height: 1.75;
+    max-width: 680px;
+    margin-bottom: 56px;
+  }
+  .thanks-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .thanks-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 32px 28px;
+    border: 1px solid var(--divider);
+  }
+  .thanks-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .thanks-role {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--royal);
+    margin-bottom: 12px;
+  }
+  .thanks-note {
+    font-size: 0.88rem;
+    color: var(--warm-gray);
+    line-height: 1.7;
+  }
+
+  /* ─── FIX: INFLUENCE CARD ───────────────────
+     Moved to bottom of resources section.
+     No longer inside the grid — sits below it
+     as a full-width standalone tile.
+  ───────────────────────────────────────────── */
+  .influence-card {
+    width: 100%;
+    /* grid-column removed — no longer a grid child */
+  }
+  .influence-link {
+    display: inline-block;
+    margin-top: 18px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--royal);
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+  .influence-link:hover { opacity: 0.7; }
+
+  /* ─── NEW: RESOURCES INTRO SECTION ─── */
+  .resources-intro-section { background: var(--cream); }
+  .resources-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.2rem, 6vw, 5.5rem);
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.05;
+    margin-bottom: 24px;
+  }
+  .resources-tagline {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--navy);
+    line-height: 1.75;
+    max-width: 680px;
+    margin-bottom: 20px;
+  }
+  .resources-body {
+    font-size: 1rem;
+    color: var(--warm-gray);
+    line-height: 1.85;
+    max-width: 680px;
+  }
+
+  /* ─── NEW: RESOURCES GRID SECTION ─── */
+  .resources-section { background: var(--cream-dark); }
+
+  .resources-filter {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+  .filter-btn {
+    padding: 9px 22px;
+    border-radius: 100px;
+    border: 1px solid var(--divider);
+    background: transparent;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .filter-btn:hover {
+    border-color: var(--royal);
+    color: var(--royal);
+  }
+  .filter-btn.active {
+    background: var(--royal);
+    border-color: var(--royal);
+    color: #fff;
+  }
+
+  .resources-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+
+  .resource-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 32px 28px;
+    border: 1px solid var(--divider);
+    display: flex;
+    flex-direction: column;
+    animation: fadeUp 0.25s ease both;
+  }
+  .resource-handle {
+    font-size: 0.78rem;
+    color: var(--warm-gray);
+    margin-bottom: 10px;
+    font-style: italic;
+    opacity: 0.8;
+  }
+  .resource-link {
+    display: inline-block;
+    margin-top: auto;
+    padding-top: 18px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--royal);
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+  .resource-link:hover { opacity: 0.7; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .section-inner { padding: 60px 24px; }
+    .thanks-grid,
+    .resources-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     SECTION 1: THANKS (showing influence card fix)
+     Your existing section — only the influence
+     card CSS has changed. Remove width: 70%.
+══════════════════════════════════════════ -->
+<section class="thanks-section">
+  <div class="section-inner">
+    <p class="section-eyebrow">With Gratitude</p>
+    <p class="thanks-intro">Your existing intro copy here…</p>
+    <div class="thanks-grid">
+
+      <!-- Your existing thanks cards continue as normal -->
+      <div class="thanks-card">
+        <h4 class="thanks-name">Sample Person</h4>
+        <p class="thanks-role">Role · Relationship</p>
+        <p class="thanks-note">This is how your existing two-column cards look above the full-width influence tile below.</p>
+      </div>
+      <div class="thanks-card">
+        <h4 class="thanks-name">Sample Person</h4>
+        <p class="thanks-role">Role · Relationship</p>
+        <p class="thanks-note">This is how your existing two-column cards look above the full-width influence tile below.</p>
+      </div>
+
+    </div>
   </div>
 </section>
+
+
+<!-- ══════════════════════════════════════════
+     SECTION 2: RESOURCES INTRO
+     New section — styled like "Nobody builds alone"
+     Add id="resources" so your nav link anchors here.
+══════════════════════════════════════════ -->
+<section class="resources-intro-section" id="resources">
+  <div class="section-inner">
+    <p class="section-eyebrow">Voices of Hope &amp; Resources</p>
+    <h2 class="resources-headline">Resources.</h2>
+    <p class="resources-tagline">Voices of hope, even though they never know it.</p>
+    <p class="resources-body">
+      God always inspires — sometimes through a sermon that finds you at 2am,
+      a book that rewires how you see Scripture, or a community that refuses to
+      let you go under. Some of these voices did open heart surgery on me, and
+      some of them may never know it until heaven. These are their websites,
+      their work, their words. Take what you need.
+    </p>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SECTION 3: RESOURCES GRID
+     New section — JS-filtered cards matching
+     your existing thanks-card style exactly.
+══════════════════════════════════════════ -->
+<section class="resources-section">
+  <div class="section-inner">
+
+    <div class="resources-filter">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="people">People</button>
+      <button class="filter-btn" data-filter="teachers">Teachers</button>
+      <button class="filter-btn" data-filter="websites">Websites</button>
+      <button class="filter-btn" data-filter="books">Books</button>
+    </div>
+
+    <div class="resources-grid" id="resourcesGrid"></div>
+
+    <!-- Full-width tile at the bottom of the resources section -->
+    <div class="thanks-card influence-card" style="margin-top: 32px;">
+      <h4 class="thanks-name">Voices That Helped Me Heal</h4>
+      <p class="thanks-role">People · Books · Teachers · Resources</p>
+      <p class="thanks-note">
+        Some of these people I've had the pleasure of speaking with personally.
+        Others shaped me through their books, teachings, research, or example.
+        I'm grateful for the way their work helped give me language, courage, and direction.
+      </p>
+      <a class="influence-link" href="https://example.com" target="_blank" rel="noopener noreferrer">
+        Visit Website →
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<script>
+  /* ─── RESOURCE DATA ───────────────────────────
+     To add more: copy the object pattern below.
+     categories: any combo of
+       "people" | "teachers" | "websites" | "books"
+     Cards with multiple categories appear in each
+     relevant filter tab automatically.
+  ─────────────────────────────────────────────── */
+  const resources = [
+    {
+      name: "Pastor Dave Adamson",
+      handle: "@aussiedave",
+      categories: ["people", "teachers"],
+      note: "The man who taught me my first Hebrew, prayed over my calling, and showed me it's okay to be broken — because God always uses it.",
+      link: "https://www.daveadamson.tv/"
+    },
+    {
+      name: "Deborah Smith Pegues",
+      handle: null,
+      categories: ["people", "teachers"],
+      note: "The woman who prayed over me at rock bottom and taught me to speak with love and life into people.",
+      link: "https://confrontingissues.com/"
+    },
+    {
+      name: "Pastor Kevin Wilson",
+      handle: "@crossculturekev",
+      categories: ["people", "teachers"],
+      note: "My unofficial \"bestea\" — the pastor who teaches us to put our uniqueness back into our Christian life.",
+      link: "https://www.thewayofchai.com/"
+    },
+    {
+      name: "Abide Network",
+      handle: "@abide.network",
+      categories: ["websites"],
+      note: "The mental health community that revived my soul in my Job era. Don't miss their Friday Night Zoom Bible Study.",
+      link: "https://www.abide.network/"
+    },
+    {
+      name: "Ellen G. White",
+      handle: "@ellen_whiteestate",
+      categories: ["people", "teachers", "books"],
+      note: "The woman who brought the Bible to life for me and helped me look forward to Christ's soon return.",
+      link: "https://whiteestate.org/"
+    },
+    {
+      name: "Pastor Doug Batchelor",
+      handle: "@pastorbatchelor",
+      categories: ["people", "teachers"],
+      note: "The man who taught me that anyone's history doesn't matter to God — because Christ died for me.",
+      link: "https://www.dougbatchelor.com/"
+    },
+    {
+      name: "Andy Hunter",
+      handle: "@andyjhunter",
+      categories: ["people", "websites"],
+      note: "The composer whose music brings me back to the heart of Christ every time, continuing in ministry with diligence and grace.",
+      link: "https://www.presenceproject.com/"
+    },
+    {
+      name: "Hope TV",
+      handle: "@HopeChannelInternational",
+      categories: ["websites"],
+      note: "The programs that carried me through the times where I had nothing left in me.",
+      link: "https://hopetv.org/shows"
+    },
+    {
+      name: "Amazing Facts",
+      handle: "@amazingfactsministry",
+      categories: ["websites"],
+      note: "The first Bible study I did to become a Christian.",
+      link: "https://www.amazingfacts.org/"
+    },
+    {
+      name: "It Is Written",
+      handle: "@itiswrittenmedia",
+      categories: ["websites"],
+      note: "The second Bible study I completed before being baptized.",
+      link: "https://www.itiswritten.com/biblestudy/#english"
+    },
+    {
+      name: "Voice of Prophecy",
+      handle: "@voiceofprophecy",
+      categories: ["websites"],
+      note: "The third Bible study I did before being baptized.",
+      link: "https://www.voiceofprophecy.com/bible-studies"
+    }
+  ];
+
+  /* ─── RENDER ─── */
+  function renderCards(filter) {
+    const grid = document.getElementById('resourcesGrid');
+    const filtered = filter === 'all'
+      ? resources
+      : resources.filter(r => r.categories.includes(filter));
+
+    if (filtered.length === 0) {
+      grid.innerHTML = `<p style="color:var(--warm-gray);font-style:italic;grid-column:1/-1;">More coming soon.</p>`;
+      return;
+    }
+
+    grid.innerHTML = filtered.map((r, i) => `
+      <div class="thanks-card resource-card" style="animation-delay:${i * 0.04}s">
+        <h4 class="thanks-name">${r.name}</h4>
+        ${r.handle ? `<p class="resource-handle">${r.handle}</p>` : ''}
+        <p class="thanks-role">${r.categories.map(c => c[0].toUpperCase() + c.slice(1)).join(' · ')}</p>
+        <p class="thanks-note">${r.note}</p>
+        <a class="resource-link" href="${r.link}" target="_blank" rel="noopener noreferrer">Visit Website →</a>
+      </div>
+    `).join('');
+  }
+
+  /* ─── FILTER BUTTONS ─── */
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderCards(btn.dataset.filter);
+    });
+  });
+
+  /* ─── INIT ─── */
+  renderCards('all');
+</script>
+
+</body>
+</html>
   
   <!-- CONNECT -->
   <section class="connect-section" id="connect">
