@@ -1011,13 +1011,12 @@
   ───────────────────────────────────────────── */
   .influence-card {
     width: 100%;
-    /* grid-column removed — no longer a grid child */
   }
   .influence-link {
     display: inline-block;
     margin-top: 18px;
     font-size: 0.8rem;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--royal);
@@ -1031,10 +1030,10 @@
   .resources-headline {
     font-family: 'Playfair Display', serif;
     font-size: clamp(3.2rem, 6vw, 5.5rem);
-    font-weight: 700;
+    font-weight: 600;
     color: var(--navy);
     line-height: 1.05;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
   }
   .resources-tagline {
     font-family: 'Playfair Display', serif;
@@ -1135,11 +1134,6 @@
 </style>
 </head>
 <body>
-<!-- ══════════════════════════════════════════
-     SECTION 2: RESOURCES INTRO
-     New section — styled like "Nobody builds alone"
-     Add id="resources" so your nav link anchors here.
-══════════════════════════════════════════ -->
 <section class="resources-intro-section" id="resources">
   <div class="section-inner">
     <p class="section-eyebrow">Voices of Hope &amp; Resources</p>
@@ -1154,13 +1148,7 @@
     </p>
   </div>
 </section>
-
-
-<!-- ══════════════════════════════════════════
-     SECTION 3: RESOURCES GRID
-     New section — JS-filtered cards matching
-     your existing thanks-card style exactly.
-══════════════════════════════════════════ -->
+	
 <section class="resources-section">
   <div class="section-inner">
 
@@ -1299,7 +1287,6 @@
   /* ─── INIT ─── */
   renderCards('all');
 </script>
-
 </body>
 </html>
   
