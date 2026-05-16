@@ -494,8 +494,8 @@
       margin-bottom: 56px;
     }
     .thanks-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      display: flex;
+      flex-direction: column;
       gap: 32px;
     }
     .thanks-card {
@@ -893,8 +893,13 @@
   </section>
 
   <!-- ACKNOWLEDGMENTS -->
-<section class="resources-section" id="resources">
-  <div class="container">
+	  <section class="thanks-section" id="acknowledgments">
+    <div class="container">
+      <span class="section-label">With Gratitude</span>
+      <h2 class="section-heading">Nobody builds<br>alone. <em>Nobody.</em></h2>
+      <p class="thanks-intro">God always brings the right people into my life at the right time. These are the people who have shaped who I am — professionally, personally, spiritually. Mad respect doesn't cover it. But it's a start.</p>
+      <div class="thanks-grid">
+        <div class="thanks-card">
 
     <div class="thanks-card influence-card" style="margin-bottom: 32px;">
       <h4 class="thanks-name">Voices That Helped Me Heal</h4>
