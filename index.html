@@ -526,8 +526,99 @@
     }
 
 /* ─── INFLUENCES / RESOURCES ─── */
+    .resources-intro-section { background: var(--cream); }
 
- 
+    .resources-intro {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.2rem;
+      color: var(--navy);
+      line-height: 1.75;
+      max-width: 760px;
+      margin-bottom: 20px;
+    }
+
+    .resources-body {
+      font-size: 1rem;
+      color: var(--warm-gray);
+      line-height: 1.85;
+      max-width: 760px;
+    }
+
+    .resources-section { background: var(--cream-dark); }
+
+    .resources-filter {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 9px 22px;
+      border-radius: 100px;
+      border: 1px solid var(--divider);
+      background: transparent;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--royal);
+      color: var(--royal);
+    }
+
+    .filter-btn.active {
+      background: var(--royal);
+      border-color: var(--royal);
+      color: #fff;
+    }
+
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+
+    .resource-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 260px;
+    }
+
+    .resource-handle {
+      font-size: 0.82rem;
+      color: var(--warm-gray);
+      margin-bottom: 10px;
+      font-style: italic;
+      opacity: 0.85;
+    }
+
+    .resource-link {
+      display: inline-block;
+      margin-top: auto;
+      padding-top: 18px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--royal);
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .resource-link:hover { opacity: 0.7; }
+
+    .influence-card {
+      margin-top: 32px;
+      width: 100%;
+    }
 
     /* ─── CONNECT ─── */
     .connect-section {
@@ -611,7 +702,7 @@
       .roles-grid { grid-template-columns: 1fr; }
       .credentials-grid { grid-template-columns: 1fr; gap: 40px; }
       .press-grid { grid-template-columns: 1fr; }
-      .thanks-grid { grid-template-columns: 1fr; }
+      .thanks-grid, .resources-grid { grid-template-columns: 1fr; }
       .container, .container-wide { padding: 0 24px; }
       section { padding: 72px 0; }
     }
@@ -628,6 +719,7 @@
       <a href="#credentials">Credentials</a>
       <a href="#press">Press</a>
       <a href="#substack">Writing</a>
+      <a href="#resources">Resources</a>
       <a href="#connect">Connect</a>
     </div>
   </nav>
@@ -931,12 +1023,40 @@
     </div>
   </section>
   
-<div class="thanks-card">
-  <h4 class="thanks-name">The Mayo PRC Team</h4>
-  <p class="thanks-role">Pain Rehabilitation Center · Phoenix, AZ</p>
-  <p class="thanks-note">Such an amazing place to be learning and start to heal. And where I was treated as a whole person with a complicated nervous system — not a complicated patient. They gave me the language, the know-how and skills I needed to move forward and continue healing.</p>
-  <p class="thanks-note">But it would be improper for me to not mention my main General Practitioner, Gastroenterologist team, Urology team, Gynocology team, Endocrinology team, Rheumatologists, Ophthalmologist and Retina Specialist, and every nurse and physician that has brought me through some seriously hard times and dire moments and succeeded in helping me to live and thrive again.</p>
-</div>
+  <!-- RESOURCES -->
+  <section class="resources-intro-section" id="resources">
+    <div class="container">
+      <span class="section-label">Voices of Hope &amp; Resources</span>
+      <h2 class="section-heading">Resources.</h2>
+      <p class="resources-intro">Voices of hope, even though they may never know it.</p>
+      <p class="resources-body">
+        God always inspires — sometimes through a sermon that finds you at 2am, a book that rewires how you see Scripture, or a community that refuses to let you go under. Some of these voices did open heart surgery on me, and some of them may never know it until heaven. These are their websites, their work, their words. Take what you need.
+      </p>
+    </div>
+  </section>
+
+  <section class="resources-section">
+    <div class="container">
+      <div class="resources-filter">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="people">People</button>
+        <button class="filter-btn" data-filter="teachers">Teachers</button>
+        <button class="filter-btn" data-filter="websites">Websites</button>
+        <button class="filter-btn" data-filter="books">Books</button>
+      </div>
+
+      <div class="resources-grid" id="resourcesGrid"></div>
+
+      <div class="thanks-card influence-card">
+        <h4 class="thanks-name">Voices That Helped Me Heal</h4>
+        <p class="thanks-role">People · Books · Teachers · Resources</p>
+        <p class="thanks-note">
+          Some of these people I’ve had the pleasure of speaking with personally. Others shaped me through their books, teachings, research, or example. I’m grateful for the way their work helped give me language, courage, and direction.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- CONNECT -->
   <section class="connect-section" id="connect">
     <div class="container">
@@ -971,6 +1091,122 @@
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 40);
     });
+
+
+    // Resources filter
+    const resources = [
+      {
+        name: "Pastor Dave Adamson",
+        handle: "@aussiedave",
+        categories: ["people", "teachers"],
+        note: "The man who taught me my first Hebrew, prayed over my calling, and showed me it’s okay to be broken — because God always uses it.",
+        link: "https://www.daveadamson.tv/"
+      },
+      {
+        name: "Deborah Smith Pegues",
+        handle: null,
+        categories: ["people", "teachers"],
+        note: "The woman who prayed over me at rock bottom and taught me to speak with love and life into people.",
+        link: "https://confrontingissues.com/"
+      },
+      {
+        name: "Pastor Kevin Wilson",
+        handle: "@crossculturekev",
+        categories: ["people", "teachers"],
+        note: "My unofficial “bestea” — the pastor who teaches us to put our uniqueness back into our Christian life.",
+        link: "https://www.thewayofchai.com/"
+      },
+      {
+        name: "Abide Network",
+        handle: "@abide.network",
+        categories: ["websites"],
+        note: "The mental health community that revived my soul in my Job era. Don’t miss their Friday Night Zoom Bible Study.",
+        link: "https://www.abide.network/"
+      },
+      {
+        name: "Ellen G. White",
+        handle: "@ellen_whiteestate",
+        categories: ["people", "teachers", "books"],
+        note: "The woman who brought the Bible to life for me and helped me look forward to Christ’s soon return.",
+        link: "https://whiteestate.org/"
+      },
+      {
+        name: "Pastor Doug Batchelor",
+        handle: "@pastorbatchelor",
+        categories: ["people", "teachers"],
+        note: "The man who taught me that anyone’s history doesn’t matter to God — because Christ died for me.",
+        link: "https://www.dougbatchelor.com/"
+      },
+      {
+        name: "Andy Hunter",
+        handle: "@andyjhunter",
+        categories: ["people", "websites"],
+        note: "The composer whose music brings me back to the heart of Christ every time, continuing in ministry with diligence and grace.",
+        link: "https://www.presenceproject.com/"
+      },
+      {
+        name: "Hope TV",
+        handle: "@HopeChannelInternational",
+        categories: ["websites"],
+        note: "The programs that carried me through the times where I had nothing left in me.",
+        link: "https://hopetv.org/shows"
+      },
+      {
+        name: "Amazing Facts",
+        handle: "@amazingfactsministry",
+        categories: ["websites"],
+        note: "The first Bible study I did to become a Christian.",
+        link: "https://www.amazingfacts.org/"
+      },
+      {
+        name: "It Is Written",
+        handle: "@itiswrittenmedia",
+        categories: ["websites"],
+        note: "The second Bible study I completed before being baptized.",
+        link: "https://www.itiswritten.com/biblestudy/#english"
+      },
+      {
+        name: "Voice of Prophecy",
+        handle: "@voiceofprophecy",
+        categories: ["websites"],
+        note: "The third Bible study I did before being baptized.",
+        link: "https://www.voiceofprophecy.com/bible-studies"
+      }
+    ];
+
+    function renderResourceCards(filter = 'all') {
+      const grid = document.getElementById('resourcesGrid');
+      if (!grid) return;
+
+      const filtered = filter === 'all'
+        ? resources
+        : resources.filter(resource => resource.categories.includes(filter));
+
+      grid.innerHTML = filtered.map(resource => `
+        <article class="thanks-card resource-card">
+          <h4 class="thanks-name">${resource.name}</h4>
+          ${resource.handle ? `<p class="resource-handle">${resource.handle}</p>` : ''}
+          <p class="thanks-role">${resource.categories.map(category => category[0].toUpperCase() + category.slice(1)).join(' · ')}</p>
+          <p class="thanks-note">${resource.note}</p>
+          <a class="resource-link" href="${resource.link}" target="_blank" rel="noopener noreferrer">Visit Website →</a>
+        </article>
+      `).join('');
+
+      grid.querySelectorAll('.resource-card').forEach(card => {
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      });
+    }
+
+    document.querySelectorAll('.filter-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(item => item.classList.remove('active'));
+        button.classList.add('active');
+        renderResourceCards(button.dataset.filter);
+      });
+    });
+
+    renderResourceCards('all');
 
     // Intersection observer for fade animations
     const observer = new IntersectionObserver((entries) => {
